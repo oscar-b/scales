@@ -1,0 +1,37 @@
+const SCALE_SERVICE_UUID = '1820';
+const SCALE_CHARACTERISTIC_UUID = '2a80';
+
+const HEADER1 = 0xef;
+const HEADER2 = 0xdd;
+const HEADER_LENGTH = 3;
+const CHECKSUM_LENGTH = 2;
+
+enum MESSAGE_TYPE {
+	SYSTEM = 0,
+	TARE = 4,
+	INFO = 7,
+	STATUS = 8,
+	IDENTIFY = 11,
+	EVENT = 12,
+	TIMER = 13,
+}
+
+// https://github.com/npouvesle/ACAIAScale_Arduino/blob/master/Scale.cpp#L22
+enum EVENT_TYPE {
+	WEIGHT = 5,
+	BATTERY = 6,
+	TIMER = 7,
+	KEY = 8,
+	ACK = 11,
+}
+
+export {
+	EVENT_TYPE,
+	HEADER_LENGTH,
+	CHECKSUM_LENGTH,
+	HEADER1,
+	HEADER2,
+	MESSAGE_TYPE,
+	SCALE_CHARACTERISTIC_UUID,
+	SCALE_SERVICE_UUID,
+};
