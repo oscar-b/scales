@@ -157,6 +157,11 @@ class Scale implements ScaleInterface {
 			case MESSAGE_TYPE.STATUS:
 				// Scale communication is up
 				this.battery = payload[0];
+				// payload[1] is unit. 2 = gram, 5 = ounce? Not consistent with divisor below. Check bits instead?
+				// payload[3] is auto off. 0 = off, 1 = 5 min, 2 = 10 min, 3 = 20 min, 4 = 30 min, 5 = 60 min
+				// payload[4] something with "touch sensitive controls", and the value being a countdown timer after activating it? https://help.acaia.co/hc/en-us/articles/205645595-Scales-with-touch-sensitive-buttons-can-be-pretty-easy-for-a-drop-of-water-to-hit-the-tare-button-and-activate-button-it-what-about-Acaia-s-scales-
+				// payload[5] is beep. 0 = off, 1 = on
+				// payload[7] is upper limit. 0 = 1000 g, 1 = 2000 g
 				console.log('MESSAGE_TYPE.STATUS', payload);
 				//todo only if not initialised already?
 				await this.service!.write(
