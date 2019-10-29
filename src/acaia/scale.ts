@@ -2,6 +2,7 @@ import { EventEmitter } from 'events';
 import Sblendid, { Service } from '@sblendid/sblendid';
 
 import { validateChecksum } from './checksum';
+import { isPacketHeader } from './packet';
 
 import {
 	CHECKSUM_LENGTH,
@@ -194,7 +195,10 @@ class Scale implements ScaleInterface {
 	};
 
 	emitNextPacket = (): void => {
-		const packetStart = this.queue.findIndex(packetHeader);
+		// Find start of packet in queue
+		const packetStart = this.queue.findIndex(isPacketHeader);
+
+		if (packetStart < 0) return;
 
 		// The payload length is defined by the 4th byte in each packet
 		const payloadLength = this.queue[packetStart + 3];
@@ -322,9 +326,6 @@ class Scale implements ScaleInterface {
 		}
 	}
 }
-
-const packetHeader = (element: number, index: number, array: Uint8Array) =>
-	element === HEADER1 && array[index + 1] === HEADER2;
 
 function encode(msgType: any, payload: Uint8Array): Buffer {
 	var buf = new ArrayBuffer(5 + payload.length);
