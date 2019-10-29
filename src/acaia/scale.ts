@@ -1,6 +1,8 @@
 import { EventEmitter } from 'events';
 import Sblendid, { Service } from '@sblendid/sblendid';
 
+import { validateChecksum } from './checksum';
+
 import {
 	CHECKSUM_LENGTH,
 	EVENT_TYPE,
@@ -323,25 +325,6 @@ class Scale implements ScaleInterface {
 
 const packetHeader = (element: number, index: number, array: Uint8Array) =>
 	element === HEADER1 && array[index + 1] === HEADER2;
-
-const validateChecksum = (packet: Uint8Array): boolean => {
-	const cs = calculateChecksum(
-		packet.slice(HEADER_LENGTH, packet.length - CHECKSUM_LENGTH),
-	);
-	const packetChecksum =
-		(packet[packet.length - 1] + packet[packet.length - 2]) & 0xff;
-
-	return cs === packetChecksum;
-};
-
-// TODO test
-function calculateChecksum(data: Uint8Array): number {
-	let sum = 0;
-
-	for (let i = 0; i < data.length; i++) sum += data[i];
-
-	return sum & 0xff;
-}
 
 function encode(msgType: any, payload: Uint8Array): Buffer {
 	var buf = new ArrayBuffer(5 + payload.length);
