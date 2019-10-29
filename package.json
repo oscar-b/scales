@@ -7,14 +7,27 @@
   "author": "Oscar Bolmsten",
   "license": "MIT",
   "scripts": {
-    "test-acaia": "ts-node src/acaia/test.ts"
+    "test-acaia": "ts-node src/acaia/index.ts",
+    "test": "jest"
+  },
+  "jest": {
+    "collectCoverage": true,
+    "coverageReporters": [
+      "text"
+    ]
   },
   "dependencies": {
     "@sblendid/adapter-node": "^0.2.0",
     "@sblendid/sblendid": "^0.2.0"
   },
   "devDependencies": {
+    "@babel/core": "^7.6.4",
+    "@babel/preset-env": "^7.6.3",
+    "@babel/preset-typescript": "^7.6.0",
+    "@types/jest": "^24.0.20",
     "@types/node": "^12.7.11",
+    "babel-jest": "^24.9.0",
+    "jest": "^24.9.0",
     "prettier": "^1.18.2",
     "ts-node": "^8.4.1",
     "typescript": "^3.6.3"
