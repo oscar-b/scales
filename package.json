@@ -8,7 +8,8 @@
   "license": "MIT",
   "scripts": {
     "test-acaia": "ts-node src/acaia/index.ts",
-    "test": "jest"
+    "test": "jest",
+    "prettier": "prettier --check 'src/**/*.ts'"
   },
   "jest": {
     "collectCoverage": true,
