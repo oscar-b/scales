@@ -1,0 +1,27 @@
+name: Tests
+on: [push]
+
+jobs:
+  test:
+    name: Test
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v1
+
+    - name: Node v10
+      uses: actions/setup-node@v1
+      with:
+        node-version: 10
+
+    - name: yarn install
+      run: yarn install
+
+    - name: Run tests
+      run: yarn test
+
+    - name: Code formatting
+      run: yarn prettier
+
+    - name: Code linting
+      run: yarn eslint
