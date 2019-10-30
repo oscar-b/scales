@@ -22,6 +22,3 @@ jobs:
 
     - name: Code formatting
       run: yarn prettier
-
-    - name: Code linting
-      run: yarn eslint
